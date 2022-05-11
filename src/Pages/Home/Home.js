@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactHome from '../ContactHome/ContactHome';
+import ContactHome from '../ContactHome/ContactHome'
 import Footer from '../Footer/Footer';
 import Info from '../Info/Info';
 import MakeAppointment from '../MakeAppoinment/MakeAppointment';
@@ -9,7 +9,7 @@ import Banner from './Banner';
 
 const Home = () => {
     return (
-        <div className='px-12'>
+        <div className='lg:px-12'>
             <Banner />
             <Info />
             <Services />
