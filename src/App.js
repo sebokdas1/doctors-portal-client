@@ -25,8 +25,8 @@ function App() {
           </RequireAuth>
         } />
 
-        <ToastContainer />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
