@@ -4,14 +4,37 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
 const BookingModal = ({ treatment, date, setTreatment }) => {
-    const { name, slots } = treatment;
+    const { _id, name, slots } = treatment;
     const [user] = useAuthState(auth);
+    const formatedDate = format(date, 'PP');
 
     const handleBooking = e => {
         e.preventDefault();
         const slot = e.target.slot.value;
         console.log(slot)
-        setTreatment(null)
+        const booking = {
+            treatmentId: _id,
+            treatment: name,
+            date: formatedDate,
+            slot,
+            patient: user.email,
+            patientName: user.displayName,
+            phone: e.target.phone.value
+        }
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            Headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                //for close modal
+                setTreatment(null)
+            })
+
     }
     return (
         <div>
