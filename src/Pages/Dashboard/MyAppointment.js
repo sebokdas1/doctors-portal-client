@@ -26,12 +26,12 @@ const MyAppointment = () => {
                 })
                 .then(data => setAppointments(data))
         }
-    }, [user])
+    }, [user, navigate])
     return (
         <div>
             <h3>my appointment page: {appointments.length}</h3>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     <thead>
                         <tr>
                             <th></th>
@@ -43,7 +43,7 @@ const MyAppointment = () => {
                     </thead>
                     <tbody>
                         {
-                            appointments.map((ap, index) => <tr>
+                            appointments.map((ap, index) => <tr key={index}>
                                 <th>{index + 1}</th>
                                 <td>{ap.patientName}</td>
                                 <td>{ap.date}</td>
