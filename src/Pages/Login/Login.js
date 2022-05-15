@@ -4,6 +4,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
     const [
@@ -19,6 +20,7 @@ const Login = () => {
         gLoading,
         gError
     ] = useSignInWithGoogle(auth);
+    const [token] = useToken(user || gUser);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const navigate = useNavigate();
@@ -26,10 +28,10 @@ const Login = () => {
     let from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
-        if (user || gUser) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [user, gUser, from, navigate])
+    }, [token, from, navigate])
 
     let errorMassage;
     if (loading || gLoading) {

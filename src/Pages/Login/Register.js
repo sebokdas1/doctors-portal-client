@@ -4,6 +4,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import auth from '../../firebase.init';
 import Loading from '../Shared/Loading';
 import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
 
 const Register = () => {
     const [
@@ -24,6 +25,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const [token] = useToken(user || gUser)
     let errorMassage;
 
     if (loading || gLoading || updating) {
@@ -35,7 +37,7 @@ const Register = () => {
             <p className='text-red-600'><small>{error?.message || gError?.message || uError?.message}</small></p>
     }
 
-    if (user || gUser) {
+    if (token) {
         navigate("/")
     }
 
@@ -45,7 +47,7 @@ const Register = () => {
         await updateProfile({ displayName: data.name });
     }
     return (
-        <div style={{ height: '80vh' }} className='flex justify-center items-center '>
+        <div style={{ height: '100vh' }} className='flex justify-center items-center '>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
                     <h2 className="text-center text-2xl font-bold">Sign Up</h2>
