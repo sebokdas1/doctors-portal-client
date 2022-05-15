@@ -37,8 +37,8 @@ const BookingModal = ({ treatment, date, setTreatment, refetch }) => {
                 else {
                     toast.error(`Already have and appointment on ${data.booking?.date} at ${data.booking?.slot}`)
                 }
-                refetch();
                 setTreatment(null);
+                refetch();
             });
 
     }
