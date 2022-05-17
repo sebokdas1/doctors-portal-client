@@ -44,7 +44,6 @@ function App() {
           <Route path='addDoctor' element={<RequireAdmin><AddDoctor /></RequireAdmin>} />
           <Route path='manage-doctor' element={<RequireAdmin><ManageDoctors /></RequireAdmin>} />
         </Route>
-
       </Routes>
       <ToastContainer />
     </div>
