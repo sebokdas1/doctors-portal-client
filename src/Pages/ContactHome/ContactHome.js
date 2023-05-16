@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import appointment from "../../assets/images/appointment.png";
 import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 // import PrimaryButton from "../Shared/PrimaryButton";
 
 const ContactHome = () => {
@@ -17,7 +18,7 @@ const ContactHome = () => {
       .then((res) => {})
       .catch((err) => console.log(err));
     // sucessMessage = "I received your message, Thanks.";
-    setSuccessMs("I received your message, Thanks.");
+    toast("We received your message");
     e.target.reset();
   };
   return (
@@ -41,6 +42,7 @@ const ContactHome = () => {
             type="email"
             placeholder="Email Address"
             className="input w-full max-w-md"
+            required
           />
           <input
             name="subject"
@@ -48,6 +50,8 @@ const ContactHome = () => {
             type="text"
             placeholder="Subject"
             className="input w-full max-w-md"
+            autoComplete="off"
+            required
           />
           <textarea
             id="message"
@@ -55,6 +59,7 @@ const ContactHome = () => {
             className="textarea w-full max-w-md"
             placeholder="Your message"
             rows={6}
+            required
           ></textarea>
           <input
             className="btn btn-primary uppercase bg-gradient-to-r from-secondary to-primary text-white font-bold"
